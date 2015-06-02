@@ -15,15 +15,15 @@
  */
 package com.github.devnied.emvnfccard.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import com.github.devnied.emvnfccard.model.enums.CountryCodeEnum;
 import com.github.devnied.emvnfccard.model.enums.CurrencyEnum;
 import com.github.devnied.emvnfccard.model.enums.TransactionTypeEnum;
 import com.github.devnied.emvnfccard.parser.apdu.annotation.Data;
 import com.github.devnied.emvnfccard.parser.apdu.impl.AbstractByteBean;
 import com.github.devnied.emvnfccard.parser.apdu.impl.DataFactory;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Bean used to describe EMV transaction record
@@ -32,7 +32,6 @@ import com.github.devnied.emvnfccard.parser.apdu.impl.DataFactory;
  * 
  */
 public class EmvTransactionRecord extends AbstractByteBean<EmvTransactionRecord> implements Serializable {
-
 	/**
 	 * Generated serial UID
 	 */
@@ -213,4 +212,16 @@ public class EmvTransactionRecord extends AbstractByteBean<EmvTransactionRecord>
 		this.time = time;
 	}
 
+	@Override
+	public String toString() {
+		return "EmvTransactionRecord{" +
+				"amount=" + amount +
+				", cyptogramData='" + cyptogramData + '\'' +
+				", terminalCountry=" + terminalCountry +
+				", currency=" + currency +
+				", date=" + date +
+				", transactionType=" + transactionType +
+				", time=" + time +
+				'}';
+	}
 }

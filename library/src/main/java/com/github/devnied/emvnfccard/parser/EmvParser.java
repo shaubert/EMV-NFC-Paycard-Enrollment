@@ -15,17 +15,6 @@
  */
 package com.github.devnied.emvnfccard.parser;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.devnied.emvnfccard.enums.CommandEnum;
 import com.github.devnied.emvnfccard.enums.EmvCardScheme;
 import com.github.devnied.emvnfccard.enums.SwEnum;
@@ -38,12 +27,16 @@ import com.github.devnied.emvnfccard.model.Afl;
 import com.github.devnied.emvnfccard.model.EmvCard;
 import com.github.devnied.emvnfccard.model.EmvTransactionRecord;
 import com.github.devnied.emvnfccard.model.enums.CurrencyEnum;
-import com.github.devnied.emvnfccard.utils.CommandApdu;
-import com.github.devnied.emvnfccard.utils.ResponseUtils;
-import com.github.devnied.emvnfccard.utils.TlvUtil;
-import com.github.devnied.emvnfccard.utils.TrackUtils;
-
+import com.github.devnied.emvnfccard.utils.*;
 import fr.devnied.bitlib.BytesUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Emv Parser.<br/>
@@ -258,7 +251,7 @@ public class EmvParser {
 		List<TLV> listTlv = TlvUtil.getlistTLV(pData, EmvTags.AID_CARD, EmvTags.KERNEL_IDENTIFIER);
 		for (TLV tlv : listTlv) {
 			if (tlv.getTag() == EmvTags.KERNEL_IDENTIFIER && ret.size() != 0) {
-				ret.add(ArrayUtils.addAll(ret.get(ret.size() - 1), tlv.getValueBytes()));
+				ret.add(EmvArrayUtils.addAll(ret.get(ret.size() - 1), tlv.getValueBytes()));
 			} else {
 				ret.add(tlv.getValueBytes());
 			}
@@ -405,7 +398,7 @@ public class EmvParser {
 		// Extract data from Message Template 1
 		byte data[] = TlvUtil.getValue(pGpo, EmvTags.RESPONSE_MESSAGE_TEMPLATE_1);
 		if (data != null) {
-			data = ArrayUtils.subarray(data, 2, data.length);
+			data = EmvArrayUtils.subarray(data, 2, data.length);
 		} else { // Extract AFL data from Message template 2
 			ret = TrackUtils.extractTrack2Data(card, pGpo);
 			if (!ret) {
@@ -536,10 +529,10 @@ public class EmvParser {
 		// Extract Card Holder name (if exist)
 		byte[] cardHolderByte = TlvUtil.getValue(pData, EmvTags.CARDHOLDER_NAME);
 		if (cardHolderByte != null) {
-			String[] name = StringUtils.split(new String(cardHolderByte).trim(), CARD_HOLDER_NAME_SEPARATOR);
+			String[] name = EmvStringUtils.split(new String(cardHolderByte).trim(), CARD_HOLDER_NAME_SEPARATOR);
 			if (name != null && name.length == 2) {
-				card.setHolderFirstname(StringUtils.trimToNull(name[0]));
-				card.setHolderLastname(StringUtils.trimToNull(name[1]));
+				card.setHolderFirstname(EmvStringUtils.trimToNull(name[0]));
+				card.setHolderLastname(EmvStringUtils.trimToNull(name[1]));
 			}
 		}
 	}

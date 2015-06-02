@@ -15,17 +15,16 @@
  */
 package com.github.devnied.emvnfccard.iso7816emv;
 
-import java.security.SecureRandom;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.github.devnied.emvnfccard.model.enums.CountryCodeEnum;
 import com.github.devnied.emvnfccard.model.enums.CurrencyEnum;
 import com.github.devnied.emvnfccard.model.enums.TransactionTypeEnum;
-
+import com.github.devnied.emvnfccard.utils.EmvStringUtils;
 import fr.devnied.bitlib.BytesUtils;
+
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Factory to create Tag value
@@ -56,13 +55,13 @@ public final class EmvTerminal {
 			terminalQual.setReaderIsOfflineOnly(true);
 			val = terminalQual.getBytes();
 		} else if (pTagAndLength.getTag() == EmvTags.TERMINAL_COUNTRY_CODE) {
-			val = BytesUtils.fromString(StringUtils.leftPad(String.valueOf(CountryCodeEnum.FR.getNumeric()), pTagAndLength.getLength() * 2,
+			val = BytesUtils.fromString(EmvStringUtils.leftPad(String.valueOf(CountryCodeEnum.FR.getNumeric()), pTagAndLength.getLength() * 2,
 					"0"));
 		} else if (pTagAndLength.getTag() == EmvTags.TRANSACTION_CURRENCY_CODE) {
-			val = BytesUtils.fromString(StringUtils.leftPad(String.valueOf(CurrencyEnum.EUR.getISOCodeNumeric()),
+			val = BytesUtils.fromString(EmvStringUtils.leftPad(String.valueOf(CurrencyEnum.EUR.getISOCodeNumeric()),
 					pTagAndLength.getLength() * 2, "0"));
 		} else if (pTagAndLength.getTag() == EmvTags.TRANSACTION_DATE) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd", Locale.US);
 			val = BytesUtils.fromString(sdf.format(new Date()));
 		} else if (pTagAndLength.getTag() == EmvTags.TRANSACTION_TYPE) {
 			val = new byte[] { (byte) TransactionTypeEnum.PURCHASE.getKey() };

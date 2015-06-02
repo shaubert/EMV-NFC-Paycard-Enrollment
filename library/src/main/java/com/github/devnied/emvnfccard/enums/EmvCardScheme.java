@@ -15,11 +15,10 @@
  */
 package com.github.devnied.emvnfccard.enums;
 
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
+import com.github.devnied.emvnfccard.utils.EmvStringUtils;
 import fr.devnied.bitlib.BytesUtils;
+
+import java.util.regex.Pattern;
 
 /**
  * Class used to define all supported NFC EMV paycard. <link>http://en.wikipedia.org/wiki/Europay_Mastercard_Visa</link>
@@ -94,7 +93,7 @@ public enum EmvCardScheme {
 			aidsByte[i] = BytesUtils.fromString(pAids[i]);
 		}
 		name = pScheme;
-		if (StringUtils.isNotBlank(pRegex)) {
+		if (!EmvStringUtils.isBlank(pRegex)) {
 			pattern = Pattern.compile(pRegex);
 		} else {
 			pattern = null;
@@ -129,10 +128,10 @@ public enum EmvCardScheme {
 	public static EmvCardScheme getCardTypeByAid(final String pAid) {
 		EmvCardScheme ret = null;
 		if (pAid != null) {
-			String aid = StringUtils.deleteWhitespace(pAid);
+			String aid = EmvStringUtils.deleteWhitespace(pAid);
 			for (EmvCardScheme val : EmvCardScheme.values()) {
 				for (String schemeAid : val.getAid()) {
-					if (aid.startsWith(StringUtils.deleteWhitespace(schemeAid))) {
+					if (aid.startsWith(EmvStringUtils.deleteWhitespace(schemeAid))) {
 						ret = val;
 						break;
 					}
@@ -153,7 +152,7 @@ public enum EmvCardScheme {
 		EmvCardScheme ret = null;
 		if (pCardNumber != null) {
 			for (EmvCardScheme val : EmvCardScheme.values()) {
-				if (val.pattern != null && val.pattern.matcher(StringUtils.deleteWhitespace(pCardNumber)).matches()) {
+				if (val.pattern != null && val.pattern.matcher(EmvStringUtils.deleteWhitespace(pCardNumber)).matches()) {
 					ret = val;
 					break;
 				}

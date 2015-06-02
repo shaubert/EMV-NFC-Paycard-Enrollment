@@ -15,22 +15,21 @@
  */
 package com.github.devnied.emvnfccard.utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.time.DateUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.devnied.emvnfccard.iso7816emv.EmvTags;
 import com.github.devnied.emvnfccard.model.EmvCard;
 import com.github.devnied.emvnfccard.model.Service;
-
 import fr.devnied.bitlib.BytesUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Extract track data
@@ -72,8 +71,21 @@ public final class TrackUtils {
 				pEmvCard.setCardNumber(m.group(1));
 				// Read expire date
 				SimpleDateFormat sdf = new SimpleDateFormat("yyMM", Locale.getDefault());
+				TimeZone gmt = TimeZone.getTimeZone("GMT");
+				sdf.setTimeZone(gmt);
 				try {
-					pEmvCard.setExpireDate(DateUtils.truncate(sdf.parse(m.group(2)), Calendar.MONTH));
+					Date parsedDate = sdf.parse(m.group(2));
+					Calendar calendar = Calendar.getInstance();
+					calendar.setTimeZone(gmt);
+					calendar.setTime(parsedDate);
+					calendar.set(Calendar.MILLISECOND, 0);
+					calendar.set(Calendar.SECOND, 0);
+					calendar.set(Calendar.HOUR_OF_DAY, 0);
+					calendar.set(Calendar.DAY_OF_MONTH, 1);
+					calendar.set(Calendar.MILLISECOND, 0);
+					pEmvCard.setExpireDate(calendar.getTime());
+					pEmvCard.setExpireMonth(calendar.get(Calendar.MONTH));
+					pEmvCard.setExpireYear(calendar.get(Calendar.YEAR));
 				} catch (ParseException e) {
 					LOGGER.error("Unparsable expire card date : {}", e.getMessage());
 					return ret;

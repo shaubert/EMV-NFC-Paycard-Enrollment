@@ -1,0 +1,2 @@
+CALL mvn deploy:deploy-file -Durl=file://W:/home/maven-repo/snapshots -DrepositoryId=maven-repo -Dfile=./target/emv-paycard-library-2.1.2-SNAPSHOT.jar -DpomFile=./pom.xml -Dsources=./target/emv-paycard-library-2.1.2-SNAPSHOT-sources.jar
+PAUSE

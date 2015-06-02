@@ -5,7 +5,7 @@
 	<name>EMV paycard library</name>
 
 	<parent>
-		<groupId>com.github.devnied.emvnfccard</groupId>
+		<groupId>com.github.shaubert.emvnfccard</groupId>
 		<artifactId>parent</artifactId>
 		<version>2.1.2-SNAPSHOT</version>
 	</parent>
@@ -14,21 +14,6 @@
 		<dependency>
 			<groupId>com.github.devnied</groupId>
 			<artifactId>bit-lib4j</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
 		</dependency>
 
 		<!-- Unit test -->
@@ -71,6 +56,17 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

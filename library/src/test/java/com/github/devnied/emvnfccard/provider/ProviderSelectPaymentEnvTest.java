@@ -1,23 +1,21 @@
 package com.github.devnied.emvnfccard.provider;
 
-import org.apache.commons.lang3.StringUtils;
-import org.fest.assertions.Assertions;
-
 import com.github.devnied.emvnfccard.parser.IProvider;
-
+import com.github.devnied.emvnfccard.utils.EmvStringUtils;
 import fr.devnied.bitlib.BytesUtils;
+import org.fest.assertions.Assertions;
 
 public class ProviderSelectPaymentEnvTest implements IProvider {
 
 	/**
 	 * Expected data
 	 */
-	private String expectedData = StringUtils.EMPTY;
+	private String expectedData = EmvStringUtils.EMPTY;
 
 	/**
 	 * Returned data
 	 */
-	private String returnedData = StringUtils.EMPTY;
+	private String returnedData = EmvStringUtils.EMPTY;
 
 	@Override
 	public byte[] transceive(final byte[] pCommand) {

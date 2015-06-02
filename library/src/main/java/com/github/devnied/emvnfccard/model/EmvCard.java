@@ -15,11 +15,11 @@
  */
 package com.github.devnied.emvnfccard.model;
 
+import com.github.devnied.emvnfccard.enums.EmvCardScheme;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
-import com.github.devnied.emvnfccard.enums.EmvCardScheme;
 
 /**
  * Bean used to describe data in EMV card
@@ -58,6 +58,8 @@ public class EmvCard extends AbstractData {
 	 * Expiration date
 	 */
 	private Date expireDate;
+	private int expireMonth;
+	private int expireYear;
 
 	/**
 	 * Card type
@@ -187,6 +189,22 @@ public class EmvCard extends AbstractData {
 	 */
 	public void setExpireDate(final Date expireDate) {
 		this.expireDate = expireDate;
+	}
+
+	public int getExpireMonth() {
+		return expireMonth;
+	}
+
+	public void setExpireMonth(int expireMonth) {
+		this.expireMonth = expireMonth;
+	}
+
+	public int getExpireYear() {
+		return expireYear;
+	}
+
+	public void setExpireYear(int expireYear) {
+		this.expireYear = expireYear;
 	}
 
 	/**
@@ -327,4 +345,23 @@ public class EmvCard extends AbstractData {
 		this.nfcLocked = nfcLocked;
 	}
 
+	@Override
+	public String toString() {
+		return "EmvCard{" +
+				"aid='" + aid + '\'' +
+				", holderLastname='" + holderLastname + '\'' +
+				", holderFirstname='" + holderFirstname + '\'' +
+				", cardNumber='" + cardNumber + '\'' +
+				", expireDate=" + expireDate +
+				", expireMonth=" + expireMonth +
+				", expireYear=" + expireYear +
+				", type=" + type +
+				", leftPinTry=" + leftPinTry +
+				", applicationLabel='" + applicationLabel + '\'' +
+				", listTransactions=" + listTransactions +
+				", atrDescription=" + atrDescription +
+				", service=" + service +
+				", nfcLocked=" + nfcLocked +
+				'}';
+	}
 }

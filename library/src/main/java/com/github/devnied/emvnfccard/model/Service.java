@@ -15,13 +15,11 @@
  */
 package com.github.devnied.emvnfccard.model;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.github.devnied.emvnfccard.model.enums.ServiceCode1Enum;
 import com.github.devnied.emvnfccard.model.enums.ServiceCode2Enum;
 import com.github.devnied.emvnfccard.model.enums.ServiceCode3Enum;
+import com.github.devnied.emvnfccard.utils.EmvStringUtils;
 import com.github.devnied.emvnfccard.utils.EnumUtils;
-
 import fr.devnied.bitlib.BitUtils;
 import fr.devnied.bitlib.BytesUtils;
 
@@ -61,7 +59,7 @@ public class Service extends AbstractData{
 	 */
 	public Service(final String pData) {
 		if (pData != null && pData.length() == 3) {
-			BitUtils bit = new BitUtils(BytesUtils.fromString(StringUtils.rightPad(pData, 4, "0")));
+			BitUtils bit = new BitUtils(BytesUtils.fromString(EmvStringUtils.rightPad(pData, 4, "0")));
 			serviceCode1 = EnumUtils.getValue(bit.getNextInteger(4), ServiceCode1Enum.class);
 			serviceCode2 = EnumUtils.getValue(bit.getNextInteger(4), ServiceCode2Enum.class);
 			serviceCode3 = EnumUtils.getValue(bit.getNextInteger(4), ServiceCode3Enum.class);
@@ -95,4 +93,12 @@ public class Service extends AbstractData{
 		return serviceCode3;
 	}
 
+	@Override
+	public String toString() {
+		return "Service{" +
+				"serviceCode1=" + serviceCode1 +
+				", serviceCode2=" + serviceCode2 +
+				", serviceCode3=" + serviceCode3 +
+				'}';
+	}
 }
