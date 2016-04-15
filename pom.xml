@@ -3,7 +3,7 @@
 	<groupId>com.github.shaubert.emvnfccard</groupId>
 	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.1.2-SNAPSHOT</version>
+	<version>2.1.2</version>
 	<name>EMV Paycard Enrollment</name>
 
 	<parent>
