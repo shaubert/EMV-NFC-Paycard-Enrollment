@@ -15,8 +15,8 @@
  */
 package com.github.devnied.emvnfccard.enums;
 
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 import com.github.devnied.emvnfccard.utils.EmvStringUtils;
-import fr.devnied.bitlib.BytesUtils;
 
 import java.util.regex.Pattern;
 

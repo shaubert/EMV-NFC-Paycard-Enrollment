@@ -15,16 +15,12 @@
  */
 package com.github.devnied.emvnfccard.parser.apdu.impl;
 
-import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.devnied.emvnfccard.model.enums.IKeyEnum;
 import com.github.devnied.emvnfccard.parser.apdu.annotation.AnnotationData;
+import com.github.devnied.emvnfccard.utils.BitUtils;
 import com.github.devnied.emvnfccard.utils.EnumUtils;
 
-import fr.devnied.bitlib.BitUtils;
+import java.util.Date;
 
 /**
  * Factory to parse data
@@ -32,12 +28,6 @@ import fr.devnied.bitlib.BitUtils;
  * @author MILLAU Julien
  */
 public final class DataFactory {
-
-	/**
-	 * Logger of this class
-	 */
-	public static final Logger LOGGER = LoggerFactory.getLogger(DataFactory.class.getName());
-
 	/**
 	 * Constant for EN1545-1 (Date format)
 	 */
@@ -77,8 +67,6 @@ public final class DataFactory {
 	 * 
 	 * @param pAnnotation
 	 *            annotation
-	 * @param pObject
-	 *            the object to set
 	 * @param pBit
 	 *            bit array
 	 */

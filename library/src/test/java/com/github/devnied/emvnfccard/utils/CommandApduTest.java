@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import com.github.devnied.emvnfccard.enums.CommandEnum;
 
-import fr.devnied.bitlib.BytesUtils;
-
 public class CommandApduTest {
 
 	@Test

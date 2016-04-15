@@ -18,10 +18,10 @@ package com.github.devnied.emvnfccard.model;
 import com.github.devnied.emvnfccard.model.enums.ServiceCode1Enum;
 import com.github.devnied.emvnfccard.model.enums.ServiceCode2Enum;
 import com.github.devnied.emvnfccard.model.enums.ServiceCode3Enum;
+import com.github.devnied.emvnfccard.utils.BitUtils;
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 import com.github.devnied.emvnfccard.utils.EmvStringUtils;
 import com.github.devnied.emvnfccard.utils.EnumUtils;
-import fr.devnied.bitlib.BitUtils;
-import fr.devnied.bitlib.BytesUtils;
 
 /**
  * Track 2 service

@@ -38,7 +38,7 @@ import com.github.devnied.emvnfccard.provider.ProviderSelectPaymentEnvTest;
 import com.github.devnied.emvnfccard.provider.ProviderVisaCardAidTest;
 import com.github.devnied.emvnfccard.provider.PseProviderTest;
 
-import fr.devnied.bitlib.BytesUtils;
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ EmvParser.class })

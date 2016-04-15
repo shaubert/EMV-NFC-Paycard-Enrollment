@@ -15,15 +15,15 @@
  */
 package com.github.devnied.emvnfccard.parser.apdu.annotation;
 
+import com.github.devnied.emvnfccard.iso7816emv.ITag;
+import com.github.devnied.emvnfccard.model.EmvTransactionRecord;
+import com.github.devnied.emvnfccard.parser.apdu.IFile;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
-import com.github.devnied.emvnfccard.iso7816emv.ITag;
-import com.github.devnied.emvnfccard.model.EmvTransactionRecord;
-import com.github.devnied.emvnfccard.parser.apdu.IFile;
 
 /**
  * Class used to manage all annotation

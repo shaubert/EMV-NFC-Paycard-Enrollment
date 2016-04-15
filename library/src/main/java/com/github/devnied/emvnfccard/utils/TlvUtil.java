@@ -23,7 +23,6 @@ import com.github.devnied.emvnfccard.iso7816emv.EmvTags;
 import com.github.devnied.emvnfccard.iso7816emv.ITag;
 import com.github.devnied.emvnfccard.iso7816emv.TLV;
 import com.github.devnied.emvnfccard.iso7816emv.TagAndLength;
-import fr.devnied.bitlib.BytesUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

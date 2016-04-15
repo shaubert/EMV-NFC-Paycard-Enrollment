@@ -17,8 +17,6 @@ import com.github.devnied.emvnfccard.iso7816emv.EmvTags;
 import com.github.devnied.emvnfccard.iso7816emv.ITag;
 import com.github.devnied.emvnfccard.iso7816emv.TagAndLength;
 
-import fr.devnied.bitlib.BytesUtils;
-
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ TlvUtil.class })
 public class TlvUtilTest {

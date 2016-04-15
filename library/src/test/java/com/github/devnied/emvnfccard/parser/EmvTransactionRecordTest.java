@@ -13,7 +13,7 @@ import com.github.devnied.emvnfccard.model.enums.CurrencyEnum;
 import com.github.devnied.emvnfccard.model.enums.TransactionTypeEnum;
 import com.github.devnied.emvnfccard.utils.TlvUtil;
 
-import fr.devnied.bitlib.BytesUtils;
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 
 public class EmvTransactionRecordTest {
 

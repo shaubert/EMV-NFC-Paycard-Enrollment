@@ -18,9 +18,6 @@ package com.github.devnied.emvnfccard.utils;
 import com.github.devnied.emvnfccard.iso7816emv.EmvTags;
 import com.github.devnied.emvnfccard.model.EmvCard;
 import com.github.devnied.emvnfccard.model.Service;
-import fr.devnied.bitlib.BytesUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,10 +36,7 @@ import java.util.regex.Pattern;
  */
 public final class TrackUtils {
 
-	/**
-	 * Class logger
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(TrackUtils.class);
+	public static final String TAG = TrackUtils.class.getSimpleName();
 
 	/**
 	 * Track 2 pattern
@@ -87,7 +81,7 @@ public final class TrackUtils {
 					pEmvCard.setExpireMonth(calendar.get(Calendar.MONTH));
 					pEmvCard.setExpireYear(calendar.get(Calendar.YEAR));
 				} catch (ParseException e) {
-					LOGGER.error("Unparsable expire card date : {}", e.getMessage());
+					Logger.e(TAG, "Unparsable expire card date : {}", e);
 					return ret;
 				}
 				// Read service

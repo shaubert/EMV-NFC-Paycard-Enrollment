@@ -15,9 +15,6 @@
  */
 package com.github.devnied.emvnfccard.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.devnied.emvnfccard.model.enums.IKeyEnum;
 
 /**
@@ -27,10 +24,7 @@ import com.github.devnied.emvnfccard.model.enums.IKeyEnum;
  */
 public final class EnumUtils {
 
-	/**
-	 * Class logger
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(EnumUtils.class);
+	public static final String TAG = EnumUtils.class.getSimpleName();
 
 	/**
 	 * Get the value of and enum from his key
@@ -48,7 +42,7 @@ public final class EnumUtils {
 				return (T) val;
 			}
 		}
-		LOGGER.error("Unknow value:" + pKey + " for Enum:" + pClass.getName());
+		Logger.e(TAG, "Unknown value:" + pKey + " for Enum:" + pClass.getName());
 		return null;
 	}
 

@@ -1,15 +1,15 @@
 package com.github.devnied.emvnfccard.utils;
 
-import java.util.Arrays;
-
 import org.fest.assertions.Assertions;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 public class AtrTest {
 
 	@Test
 	public void testDescriptionFromATR() {
-
+		Logger.ENABLED = false;
 		Assertions.assertThat(AtrUtils.getDescription("3B 02 14 50")).isEqualTo(Arrays.asList("Schlumberger Multiflex 3k"));
 		Assertions.assertThat(AtrUtils.getDescription(null)).isEqualTo(null);
 		Assertions
@@ -21,7 +21,7 @@ public class AtrTest {
 
 	@Test
 	public void testDescriptionFromATS() {
-
+		Logger.ENABLED = false;
 		Assertions.assertThat(AtrUtils.getDescriptionFromAts("20 63 CB A3 A0")).isEqualTo(
 				Arrays.asList("VISA card from Banque Populaire"));
 		Assertions.assertThat(AtrUtils.getDescription(null)).isEqualTo(null);

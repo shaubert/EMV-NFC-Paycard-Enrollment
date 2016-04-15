@@ -16,9 +16,6 @@
 
 package com.github.devnied.emvnfccard.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,10 +30,7 @@ import java.util.*;
  */
 public final class AtrUtils {
 
-	/**
-	 * Class logger
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(AtrUtils.class);
+	public static final String TAG = AtrUtils.class.getSimpleName();
 
 	/**
 	 * MultiMap containing ATR
@@ -70,7 +64,7 @@ public final class AtrUtils {
 				} else if (line.startsWith("3")) { // ATR hex
 					currentATR = EmvStringUtils.deleteWhitespace(line.toUpperCase());
 				} else {
-					LOGGER.error("Encountered unexpected line in atr list: currentATR=" + currentATR + " Line(" + lineNumber
+					Logger.e(TAG, "Encountered unexpected line in atr list: currentATR=" + currentATR + " Line(" + lineNumber
 							+ ") = " + line);
 				}
 			}

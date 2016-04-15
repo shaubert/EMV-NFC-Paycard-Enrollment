@@ -15,14 +15,7 @@
  */
 package com.github.devnied.emvnfccard.utils;
 
-import java.util.Arrays;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.devnied.emvnfccard.enums.SwEnum;
-
-import fr.devnied.bitlib.BytesUtils;
 
 /**
  * Method used to manipulate response from APDU command
@@ -31,11 +24,6 @@ import fr.devnied.bitlib.BytesUtils;
  * 
  */
 public final class ResponseUtils {
-
-	/**
-	 * Class logger
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(ResponseUtils.class);
 
 	/**
 	 * Method used to check if the last command return SW1SW2 == 9000
@@ -59,11 +47,6 @@ public final class ResponseUtils {
 	 */
 	public static boolean isEquals(final byte[] pByte, final SwEnum pEnum) {
 		SwEnum val = SwEnum.getSW(pByte);
-		if (LOGGER.isDebugEnabled() && pByte != null) {
-			LOGGER.debug("Response Status <"
-					+ BytesUtils.bytesToStringNoSpace(Arrays.copyOfRange(pByte, pByte.length - 2, pByte.length)) + "> : "
-					+ (val != null ? val.getDetail() : "Unknow"));
-		}
 		return val != null && val == pEnum;
 	}
 

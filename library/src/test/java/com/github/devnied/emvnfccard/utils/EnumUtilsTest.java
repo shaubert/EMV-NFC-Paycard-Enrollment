@@ -9,7 +9,7 @@ public class EnumUtilsTest {
 
 	@Test
 	public void testEnum() {
-
+		Logger.ENABLED = false;
 		Assertions.assertThat(EnumUtils.getValue(100000, CountryCodeEnum.class)).isNull();
 		Assertions.assertThat(EnumUtils.getValue(250, CountryCodeEnum.class)).isEqualTo(CountryCodeEnum.FR);
 

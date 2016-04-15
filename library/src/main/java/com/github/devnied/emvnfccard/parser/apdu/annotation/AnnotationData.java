@@ -15,12 +15,11 @@
  */
 package com.github.devnied.emvnfccard.parser.apdu.annotation;
 
-import java.lang.reflect.Field;
-
 import com.github.devnied.emvnfccard.iso7816emv.EmvTags;
 import com.github.devnied.emvnfccard.iso7816emv.ITag;
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 
-import fr.devnied.bitlib.BytesUtils;
+import java.lang.reflect.Field;
 
 /**
  * Bean which manage all annotation data

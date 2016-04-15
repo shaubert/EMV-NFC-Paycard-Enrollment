@@ -3,7 +3,7 @@ package com.github.devnied.emvnfccard.iso7816emv;
 import org.fest.assertions.Assertions;
 import org.junit.Test;
 
-import fr.devnied.bitlib.BytesUtils;
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 
 public class TagAndLengthTest {
 

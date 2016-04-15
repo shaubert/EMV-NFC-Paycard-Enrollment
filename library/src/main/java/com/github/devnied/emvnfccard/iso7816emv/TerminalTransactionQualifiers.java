@@ -15,9 +15,9 @@
  */
 package com.github.devnied.emvnfccard.iso7816emv;
 
-import java.util.Arrays;
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 
-import fr.devnied.bitlib.BytesUtils;
+import java.util.Arrays;
 
 /**
  * This implementation is a mix of EMV & VISA TTQ

@@ -28,9 +28,6 @@ import com.github.devnied.emvnfccard.model.EmvCard;
 import com.github.devnied.emvnfccard.model.EmvTransactionRecord;
 import com.github.devnied.emvnfccard.model.enums.CurrencyEnum;
 import com.github.devnied.emvnfccard.utils.*;
-import fr.devnied.bitlib.BytesUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -47,10 +44,7 @@ import java.util.List;
  */
 public class EmvParser {
 
-	/**
-	 * Class Logger
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(EmvParser.class);
+	public static final String TAG = EmvParser.class.getSimpleName();
 
 	/**
 	 * PPSE directory "2PAY.SYS.DDF01"
@@ -122,9 +116,6 @@ public class EmvParser {
 	 * @throws CommunicationException
 	 */
 	protected byte[] selectPaymentEnvironment() throws CommunicationException {
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Select " + (contactLess ? "PPSE" : "PSE") + " Application");
-		}
 		// Select the PPSE or PSE directory
 		return provider.transceive(new CommandApdu(CommandEnum.SELECT, contactLess ? PPSE : PSE, 0).toBytes());
 	}
@@ -137,9 +128,6 @@ public class EmvParser {
 	 */
 	protected int getLeftPinTry() throws CommunicationException {
 		int ret = UNKNOW;
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Get Left PIN try");
-		}
 		// Left PIN try command
 		byte[] data = provider.transceive(new CommandApdu(CommandEnum.GET_DATA, 0x9F, 0x17, 0).toBytes());
 		if (ResponseUtils.isSucceed(data)) {
@@ -167,18 +155,12 @@ public class EmvParser {
 		// Check SFI
 		if (data != null) {
 			int sfi = BytesUtils.byteArrayToInt(data);
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("SFI found:" + sfi);
-			}
 			data = provider.transceive(new CommandApdu(CommandEnum.READ_RECORD, sfi, sfi << 3 | 4, 0).toBytes());
 			// If LE is not correct
 			if (ResponseUtils.isEquals(data, SwEnum.SW_6C)) {
 				data = provider.transceive(new CommandApdu(CommandEnum.READ_RECORD, sfi, sfi << 3 | 4, data[data.length - 1]).toBytes());
 			}
 			return data;
-		}
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("(FCI) Issuer Discretionary Data is already present");
 		}
 		return pData;
 	}
@@ -189,9 +171,6 @@ public class EmvParser {
 	 * @return decoded application label or null
 	 */
 	protected String extractApplicationLabel(final byte[] pData) {
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Extract Application label");
-		}
 		String label = null;
 		byte[] labelByte = TlvUtil.getValue(pData, EmvTags.APPLICATION_LABEL);
 		if (labelByte != null) {
@@ -208,9 +187,6 @@ public class EmvParser {
 	 */
 	protected boolean readWithPSE() throws CommunicationException {
 		boolean ret = false;
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Try to read card with Payment System Environment");
-		}
 		// Select the PPSE or PSE directory
 		byte[] data = selectPaymentEnvironment();
 		if (ResponseUtils.isSucceed(data)) {
@@ -230,8 +206,6 @@ public class EmvParser {
 					card.setNfcLocked(true);
 				}
 			}
-		} else if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug((contactLess ? "PPSE" : "PSE") + " not found -> Use kown AID");
 		}
 
 		return ret;
@@ -263,9 +237,6 @@ public class EmvParser {
 	 * Read EMV card with AID
 	 */
 	protected void readWithAID() throws CommunicationException {
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Try to read card with AID");
-		}
 		// Test each card from know EMV AID
 		for (EmvCardScheme type : EmvCardScheme.values()) {
 			for (byte[] aid : type.getAidByte()) {
@@ -285,9 +256,6 @@ public class EmvParser {
 	 * @throws CommunicationException
 	 */
 	protected byte[] selectAID(final byte[] pAid) throws CommunicationException {
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Select AID: " + BytesUtils.bytesToString(pAid));
-		}
 		return provider.transceive(new CommandApdu(CommandEnum.SELECT, pAid, 0).toBytes());
 	}
 
@@ -311,9 +279,6 @@ public class EmvParser {
 			if (ret) {
 				// Get AID
 				String aid = BytesUtils.bytesToStringNoSpace(TlvUtil.getValue(data, EmvTags.DEDICATED_FILE_NAME));
-				if (LOGGER.isDebugEnabled()) {
-					LOGGER.debug("Application label:" + pApplicationLabel + " with Aid:" + aid);
-				}
 				card.setAid(aid);
 				card.setType(findCardScheme(aid, card.getCardNumber()));
 				card.setApplicationLabel(pApplicationLabel);
@@ -337,9 +302,6 @@ public class EmvParser {
 		// Get real type for french card
 		if (type == EmvCardScheme.CB) {
 			type = EmvCardScheme.getCardTypeByCardNumber(pCardNumber);
-			if (type != null) {
-				LOGGER.debug("Real type:" + type.getName());
-			}
 		}
 		return type;
 	}
@@ -442,9 +404,6 @@ public class EmvParser {
 	 */
 	protected List<TagAndLength> getLogFormat() throws CommunicationException {
 		List<TagAndLength> ret = new ArrayList<TagAndLength>();
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("GET log format");
-		}
 		// Get log format
 		byte[] data = provider.transceive(new CommandApdu(CommandEnum.GET_DATA, 0x9F, 0x4F, 0).toBytes());
 		if (ResponseUtils.isSucceed(data)) {
@@ -560,7 +519,7 @@ public class EmvParser {
 				}
 			}
 		} catch (IOException ioe) {
-			LOGGER.error("Construct GPO Command:" + ioe.getMessage(), ioe);
+			Logger.e(TAG, "Construct GPO Command:" + ioe.getMessage(), ioe);
 		}
 		return pProvider.transceive(new CommandApdu(CommandEnum.GPO, out.toByteArray(), 0).toBytes());
 	}

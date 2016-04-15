@@ -18,8 +18,8 @@ package com.github.devnied.emvnfccard.iso7816emv;
 import com.github.devnied.emvnfccard.model.enums.CountryCodeEnum;
 import com.github.devnied.emvnfccard.model.enums.CurrencyEnum;
 import com.github.devnied.emvnfccard.model.enums.TransactionTypeEnum;
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 import com.github.devnied.emvnfccard.utils.EmvStringUtils;
-import fr.devnied.bitlib.BytesUtils;
 
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;

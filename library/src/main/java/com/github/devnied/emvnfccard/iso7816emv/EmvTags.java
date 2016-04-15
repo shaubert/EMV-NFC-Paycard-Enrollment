@@ -15,11 +15,11 @@
  */
 package com.github.devnied.emvnfccard.iso7816emv;
 
-import java.lang.reflect.Field;
-import java.util.LinkedHashMap;
-
 import com.github.devnied.emvnfccard.enums.TagValueTypeEnum;
 import com.github.devnied.emvnfccard.iso7816emv.impl.TagImpl;
+
+import java.lang.reflect.Field;
+import java.util.LinkedHashMap;
 
 /**
  * http://www.emvlab.org/emvtags/all/

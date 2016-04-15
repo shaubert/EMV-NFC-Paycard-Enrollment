@@ -2,7 +2,7 @@ package com.github.devnied.emvnfccard.provider;
 
 import com.github.devnied.emvnfccard.parser.IProvider;
 import com.github.devnied.emvnfccard.utils.EmvStringUtils;
-import fr.devnied.bitlib.BytesUtils;
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 import org.fest.assertions.Assertions;
 
 public class ProviderSelectPaymentEnvTest implements IProvider {

@@ -15,24 +15,17 @@
  */
 package com.github.devnied.emvnfccard.parser.apdu.impl;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.devnied.emvnfccard.iso7816emv.ITag;
 import com.github.devnied.emvnfccard.iso7816emv.TagAndLength;
 import com.github.devnied.emvnfccard.model.AbstractData;
 import com.github.devnied.emvnfccard.parser.apdu.IFile;
 import com.github.devnied.emvnfccard.parser.apdu.annotation.AnnotationData;
 import com.github.devnied.emvnfccard.parser.apdu.annotation.AnnotationUtils;
+import com.github.devnied.emvnfccard.utils.BitUtils;
+import com.github.devnied.emvnfccard.utils.Logger;
 
-import fr.devnied.bitlib.BitUtils;
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * Abstract class for all object to parse
@@ -41,15 +34,12 @@ import fr.devnied.bitlib.BitUtils;
  */
 public abstract class AbstractByteBean<T> extends AbstractData implements IFile {
 
+	public static final String TAG = AbstractByteBean.class.getSimpleName();
+
 	/**
 	 * Generated serial UID
 	 */
 	private static final long serialVersionUID = -2016039522844322383L;
-
-	/**
-	 * Logger of the class
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractByteBean.class.getName());
 
 	/**
 	 * Method to get the annotation set from the current class
@@ -116,9 +106,9 @@ public abstract class AbstractByteBean<T> extends AbstractData implements IFile 
 			try {
 				field.set(pData, pValue);
 			} catch (IllegalArgumentException e) {
-				LOGGER.error("Parameters of fied.set are not valid", e);
+				Logger.e(TAG, "Parameters of field.set are not valid", e);
 			} catch (IllegalAccessException e) {
-				LOGGER.error("Impossible to set the Field :" + field.getName(), e);
+				Logger.e(TAG, "Impossible to set the Field :" + field.getName(), e);
 			}
 		}
 	}

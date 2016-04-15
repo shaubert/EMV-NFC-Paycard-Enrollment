@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import com.github.devnied.emvnfccard.parser.IProvider;
 import com.github.devnied.emvnfccard.utils.TlvUtil;
 
-import fr.devnied.bitlib.BytesUtils;
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 
 public class ProviderVisaCardAidTest implements IProvider {
 

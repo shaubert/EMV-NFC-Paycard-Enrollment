@@ -10,8 +10,6 @@ import com.github.devnied.emvnfccard.model.enums.ServiceCode1Enum;
 import com.github.devnied.emvnfccard.model.enums.ServiceCode2Enum;
 import com.github.devnied.emvnfccard.model.enums.ServiceCode3Enum;
 
-import fr.devnied.bitlib.BytesUtils;
-
 public class TrackUtilsTest {
 
 	@Test

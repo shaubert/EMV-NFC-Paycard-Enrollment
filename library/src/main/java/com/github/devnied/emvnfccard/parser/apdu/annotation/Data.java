@@ -15,12 +15,12 @@
  */
 package com.github.devnied.emvnfccard.parser.apdu.annotation;
 
+import com.github.devnied.emvnfccard.utils.BitUtils;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import fr.devnied.bitlib.BitUtils;
 
 /**
  * Annotation to describe field information

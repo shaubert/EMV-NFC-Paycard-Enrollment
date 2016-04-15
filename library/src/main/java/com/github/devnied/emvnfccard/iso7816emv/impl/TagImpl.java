@@ -16,13 +16,12 @@ package com.github.devnied.emvnfccard.iso7816emv.impl;
  * limitations under the License.
  */
 
-import java.util.Arrays;
-
 import com.github.devnied.emvnfccard.enums.TagTypeEnum;
 import com.github.devnied.emvnfccard.enums.TagValueTypeEnum;
 import com.github.devnied.emvnfccard.iso7816emv.ITag;
+import com.github.devnied.emvnfccard.utils.BytesUtils;
 
-import fr.devnied.bitlib.BytesUtils;
+import java.util.Arrays;
 
 /**
  * 
